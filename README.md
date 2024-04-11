@@ -1,0 +1,3 @@
+This repository is designed for the submission to T-CHES of "Phase Modulation Side Channels: Jittery JTAG for On-Chip Voltage Measurements".
+
+NOTE: This repository is setup for anonymous review, and as such it has some oddities compared to the final public repository. The final paper may split off some of the e.g., hardware tools, into their own repository seperate from the various paper-specific notebooks.

@@ -1,0 +1,944 @@
+   1              	 .cpu cortex-m4
+   2              	 .eabi_attribute 20,1
+   3              	 .eabi_attribute 21,1
+   4              	 .eabi_attribute 23,3
+   5              	 .eabi_attribute 24,1
+   6              	 .eabi_attribute 25,1
+   7              	 .eabi_attribute 26,1
+   8              	 .eabi_attribute 30,4
+   9              	 .eabi_attribute 34,1
+  10              	 .eabi_attribute 18,4
+  11              	 .file "simpleserial-aes.c"
+  12              	 .text
+  13              	.Ltext0:
+  14              	 .cfi_sections .debug_frame
+  15              	 .section .text.get_mask,"ax",%progbits
+  16              	 .align 1
+  17              	 .global get_mask
+  18              	 .arch armv7e-m
+  19              	 .syntax unified
+  20              	 .thumb
+  21              	 .thumb_func
+  22              	 .fpu softvfp
+  24              	get_mask:
+  25              	.LVL0:
+  26              	.LFB0:
+  27              	 .file 1 "simpleserial-aes.c"
+   1:simpleserial-aes.c **** /*
+   2:simpleserial-aes.c ****     This file is part of the ChipWhisperer Example Targets
+   3:simpleserial-aes.c ****     Copyright (C) 2012-2017 NewAE Technology Inc.
+   4:simpleserial-aes.c **** 
+   5:simpleserial-aes.c ****     This program is free software: you can redistribute it and/or modify
+   6:simpleserial-aes.c ****     it under the terms of the GNU General Public License as published by
+   7:simpleserial-aes.c ****     the Free Software Foundation, either version 3 of the License, or
+   8:simpleserial-aes.c ****     (at your option) any later version.
+   9:simpleserial-aes.c **** 
+  10:simpleserial-aes.c ****     This program is distributed in the hope that it will be useful,
+  11:simpleserial-aes.c ****     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  12:simpleserial-aes.c ****     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  13:simpleserial-aes.c ****     GNU General Public License for more details.
+  14:simpleserial-aes.c **** 
+  15:simpleserial-aes.c ****     You should have received a copy of the GNU General Public License
+  16:simpleserial-aes.c ****     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  17:simpleserial-aes.c **** */
+  18:simpleserial-aes.c **** 
+  19:simpleserial-aes.c **** #include "aes-independant.h"
+  20:simpleserial-aes.c **** #include "hal.h"
+  21:simpleserial-aes.c **** #include "simpleserial.h"
+  22:simpleserial-aes.c **** #include <stdint.h>
+  23:simpleserial-aes.c **** #include <stdlib.h>
+  24:simpleserial-aes.c **** 
+  25:simpleserial-aes.c **** uint8_t get_mask(uint8_t* m, uint8_t len)
+  26:simpleserial-aes.c **** {
+  28              	 .loc 1 26 1 view-0
+  29              	 .cfi_startproc
+  30              	 
+  31              	 
+  27:simpleserial-aes.c ****   aes_indep_mask(m, len);
+  32              	 .loc 1 27 3 view .LVU1
+  26:simpleserial-aes.c ****   aes_indep_mask(m, len);
+  33              	 .loc 1 26 1 is_stmt 0 view .LVU2
+  34 0000 08B5     	 push {r3,lr}
+  35              	.LCFI0:
+  36              	 .cfi_def_cfa_offset 8
+  37              	 .cfi_offset 3,-8
+  38              	 .cfi_offset 14,-4
+  39              	 .loc 1 27 3 view .LVU3
+  40 0002 024B     	 ldr r3,.L2
+  41 0004 9847     	 blx r3
+  42              	.LVL1:
+  28:simpleserial-aes.c ****   return 0x00;
+  43              	 .loc 1 28 3 is_stmt 1 view .LVU4
+  29:simpleserial-aes.c **** }
+  44              	 .loc 1 29 1 is_stmt 0 view .LVU5
+  45 0006 0020     	 movs r0,#0
+  46 0008 08BD     	 pop {r3,pc}
+  47              	.L3:
+  48 000a 00BF     	 .align 2
+  49              	.L2:
+  50 000c 00000000 	 .word aes_indep_mask
+  51              	 .cfi_endproc
+  52              	.LFE0:
+  54              	 .section .text.get_key,"ax",%progbits
+  55              	 .align 1
+  56              	 .global get_key
+  57              	 .syntax unified
+  58              	 .thumb
+  59              	 .thumb_func
+  60              	 .fpu softvfp
+  62              	get_key:
+  63              	.LVL2:
+  64              	.LFB1:
+  30:simpleserial-aes.c **** 
+  31:simpleserial-aes.c **** uint8_t get_key(uint8_t* k, uint8_t len)
+  32:simpleserial-aes.c **** {
+  65              	 .loc 1 32 1 is_stmt 1 view-0
+  66              	 .cfi_startproc
+  67              	 
+  68              	 
+  33:simpleserial-aes.c **** 	aes_indep_key(k);
+  69              	 .loc 1 33 2 view .LVU7
+  32:simpleserial-aes.c **** 	aes_indep_key(k);
+  70              	 .loc 1 32 1 is_stmt 0 view .LVU8
+  71 0000 08B5     	 push {r3,lr}
+  72              	.LCFI1:
+  73              	 .cfi_def_cfa_offset 8
+  74              	 .cfi_offset 3,-8
+  75              	 .cfi_offset 14,-4
+  76              	 .loc 1 33 2 view .LVU9
+  77 0002 024B     	 ldr r3,.L5
+  78 0004 9847     	 blx r3
+  79              	.LVL3:
+  34:simpleserial-aes.c **** 	return 0x00;
+  80              	 .loc 1 34 2 is_stmt 1 view .LVU10
+  35:simpleserial-aes.c **** }
+  81              	 .loc 1 35 1 is_stmt 0 view .LVU11
+  82 0006 0020     	 movs r0,#0
+  83 0008 08BD     	 pop {r3,pc}
+  84              	.L6:
+  85 000a 00BF     	 .align 2
+  86              	.L5:
+  87 000c 00000000 	 .word aes_indep_key
+  88              	 .cfi_endproc
+  89              	.LFE1:
+  91              	 .section .text.get_pt,"ax",%progbits
+  92              	 .align 1
+  93              	 .global get_pt
+  94              	 .syntax unified
+  95              	 .thumb
+  96              	 .thumb_func
+  97              	 .fpu softvfp
+  99              	get_pt:
+ 100              	.LVL4:
+ 101              	.LFB2:
+  36:simpleserial-aes.c **** 
+  37:simpleserial-aes.c **** uint8_t get_pt(uint8_t* pt, uint8_t len)
+  38:simpleserial-aes.c **** {
+ 102              	 .loc 1 38 1 is_stmt 1 view-0
+ 103              	 .cfi_startproc
+ 104              	 
+ 105              	 
+  39:simpleserial-aes.c ****     uint32_t PMC_orig;
+ 106              	 .loc 1 39 5 view .LVU13
+  40:simpleserial-aes.c ****     uint32_t cal12;
+ 107              	 .loc 1 40 5 view .LVU14
+  41:simpleserial-aes.c **** 
+  42:simpleserial-aes.c ****     aes_indep_enc_pretrigger(pt);
+ 108              	 .loc 1 42 5 view .LVU15
+  38:simpleserial-aes.c ****     uint32_t PMC_orig;
+ 109              	 .loc 1 38 1 is_stmt 0 view .LVU16
+ 110 0000 10B5     	 push {r4,lr}
+ 111              	.LCFI2:
+ 112              	 .cfi_def_cfa_offset 8
+ 113              	 .cfi_offset 4,-8
+ 114              	 .cfi_offset 14,-4
+ 115              	 .loc 1 42 5 view .LVU17
+ 116 0002 0A4B     	 ldr r3,.L8
+  38:simpleserial-aes.c ****     uint32_t PMC_orig;
+ 117              	 .loc 1 38 1 view .LVU18
+ 118 0004 0446     	 mov r4,r0
+ 119              	 .loc 1 42 5 view .LVU19
+ 120 0006 9847     	 blx r3
+ 121              	.LVL5:
+  43:simpleserial-aes.c **** 
+  44:simpleserial-aes.c ****     //Disable write protect
+  45:simpleserial-aes.c ****     /*pmc_set_writeprotect(0);
+  46:simpleserial-aes.c ****     PMC_orig = PMC_OCR;
+  47:simpleserial-aes.c **** 
+  48:simpleserial-aes.c ****     cal12 = (PMC_orig >> 16) & 0x7F;
+  49:simpleserial-aes.c **** 
+  50:simpleserial-aes.c **** 
+  51:simpleserial-aes.c ****     PMC_OCR = (1<<23) | (rnd << 16);*/
+  52:simpleserial-aes.c **** 	trigger_high();
+ 122              	 .loc 1 52 2 is_stmt 1 view .LVU20
+ 123 0008 094B     	 ldr r3,.L8+4
+ 124 000a 9847     	 blx r3
+ 125              	.LVL6:
+  53:simpleserial-aes.c **** 
+  54:simpleserial-aes.c ****   #ifdef ADD_JITTER
+  55:simpleserial-aes.c ****   for (volatile uint8_t k = 0; k < (*pt & 0x0F); k++);
+  56:simpleserial-aes.c ****   #endif
+  57:simpleserial-aes.c **** 
+  58:simpleserial-aes.c **** 	aes_indep_enc(pt); /* encrypting the data block */
+ 126              	 .loc 1 58 2 view .LVU21
+ 127 000c 2046     	 mov r0,r4
+ 128 000e 094B     	 ldr r3,.L8+8
+ 129 0010 9847     	 blx r3
+ 130              	.LVL7:
+  59:simpleserial-aes.c **** 	trigger_low();
+ 131              	 .loc 1 59 2 view .LVU22
+ 132 0012 094B     	 ldr r3,.L8+12
+ 133 0014 9847     	 blx r3
+ 134              	.LVL8:
+  60:simpleserial-aes.c **** 
+  61:simpleserial-aes.c ****     aes_indep_enc_posttrigger(pt);
+ 135              	 .loc 1 61 5 view .LVU23
+ 136 0016 2046     	 mov r0,r4
+ 137 0018 084B     	 ldr r3,.L8+16
+ 138 001a 9847     	 blx r3
+ 139              	.LVL9:
+  62:simpleserial-aes.c **** 
+  63:simpleserial-aes.c ****     //Back to normal so serial works
+  64:simpleserial-aes.c ****     /*PMC_OCR = PMC_orig;*/
+  65:simpleserial-aes.c **** 
+  66:simpleserial-aes.c **** 	simpleserial_put('r', 16, pt);
+ 140              	 .loc 1 66 2 view .LVU24
+ 141 001c 084B     	 ldr r3,.L8+20
+ 142 001e 2246     	 mov r2,r4
+ 143 0020 1021     	 movs r1,#16
+ 144 0022 7220     	 movs r0,#114
+ 145 0024 9847     	 blx r3
+ 146              	.LVL10:
+  67:simpleserial-aes.c **** 	return 0x00;
+ 147              	 .loc 1 67 2 view .LVU25
+  68:simpleserial-aes.c **** }
+ 148              	 .loc 1 68 1 is_stmt 0 view .LVU26
+ 149 0026 0020     	 movs r0,#0
+ 150 0028 10BD     	 pop {r4,pc}
+ 151              	.LVL11:
+ 152              	.L9:
+ 153              	 .loc 1 68 1 view .LVU27
+ 154 002a 00BF     	 .align 2
+ 155              	.L8:
+ 156 002c 00000000 	 .word aes_indep_enc_pretrigger
+ 157 0030 00000000 	 .word trigger_high
+ 158 0034 00000000 	 .word aes_indep_enc
+ 159 0038 00000000 	 .word trigger_low
+ 160 003c 00000000 	 .word aes_indep_enc_posttrigger
+ 161 0040 00000000 	 .word simpleserial_put
+ 162              	 .cfi_endproc
+ 163              	.LFE2:
+ 165              	 .section .text.aes,"ax",%progbits
+ 166              	 .align 1
+ 167              	 .global aes
+ 168              	 .syntax unified
+ 169              	 .thumb
+ 170              	 .thumb_func
+ 171              	 .fpu softvfp
+ 173              	aes:
+ 174              	.LVL12:
+ 175              	.LFB6:
+  69:simpleserial-aes.c **** 
+  70:simpleserial-aes.c **** uint8_t reset(uint8_t* x, uint8_t len)
+  71:simpleserial-aes.c **** {
+  72:simpleserial-aes.c ****     // Reset key here if needed
+  73:simpleserial-aes.c **** 	return 0x00;
+  74:simpleserial-aes.c **** }
+  75:simpleserial-aes.c **** 
+  76:simpleserial-aes.c **** static uint16_t num_encryption_rounds = 10;
+  77:simpleserial-aes.c **** 
+  78:simpleserial-aes.c **** uint8_t enc_multi_getpt(uint8_t* pt, uint8_t len)
+  79:simpleserial-aes.c **** {
+  80:simpleserial-aes.c ****     aes_indep_enc_pretrigger(pt);
+  81:simpleserial-aes.c **** 
+  82:simpleserial-aes.c ****     for(unsigned int i = 0; i < num_encryption_rounds; i++){
+  83:simpleserial-aes.c ****         trigger_high();
+  84:simpleserial-aes.c ****         aes_indep_enc(pt);
+  85:simpleserial-aes.c ****         trigger_low();
+  86:simpleserial-aes.c ****     }
+  87:simpleserial-aes.c **** 
+  88:simpleserial-aes.c ****     aes_indep_enc_posttrigger(pt);
+  89:simpleserial-aes.c **** 	simpleserial_put('r', 16, pt);
+  90:simpleserial-aes.c ****     return 0;
+  91:simpleserial-aes.c **** }
+  92:simpleserial-aes.c **** 
+  93:simpleserial-aes.c **** uint8_t enc_multi_setnum(uint8_t* t, uint8_t len)
+  94:simpleserial-aes.c **** {
+  95:simpleserial-aes.c ****     //Assumes user entered a number like [0, 200] to mean "200"
+  96:simpleserial-aes.c ****     //which is most sane looking for humans I think
+  97:simpleserial-aes.c ****     num_encryption_rounds = t[1];
+  98:simpleserial-aes.c ****     num_encryption_rounds |= t[0] << 8;
+  99:simpleserial-aes.c ****     return 0;
+ 100:simpleserial-aes.c **** }
+ 101:simpleserial-aes.c **** 
+ 102:simpleserial-aes.c **** #if SS_VER == SS_VER_2_1
+ 103:simpleserial-aes.c **** uint8_t aes(uint8_t cmd, uint8_t scmd, uint8_t len, uint8_t *buf)
+ 104:simpleserial-aes.c **** {
+ 176              	 .loc 1 104 1 is_stmt 1 view-0
+ 177              	 .cfi_startproc
+ 178              	 
+ 179              	 
+ 105:simpleserial-aes.c ****     uint8_t req_len = 0;
+ 180              	 .loc 1 105 5 view .LVU29
+ 106:simpleserial-aes.c ****     uint8_t err = 0;
+ 181              	 .loc 1 106 5 view .LVU30
+ 107:simpleserial-aes.c ****     uint8_t mask_len = 0;
+ 182              	 .loc 1 107 5 view .LVU31
+ 108:simpleserial-aes.c ****     if (scmd & 0x04) {
+ 183              	 .loc 1 108 5 view .LVU32
+ 104:simpleserial-aes.c ****     uint8_t req_len = 0;
+ 184              	 .loc 1 104 1 is_stmt 0 view .LVU33
+ 185 0000 F8B5     	 push {r3,r4,r5,r6,r7,lr}
+ 186              	.LCFI3:
+ 187              	 .cfi_def_cfa_offset 24
+ 188              	 .cfi_offset 3,-24
+ 189              	 .cfi_offset 4,-20
+ 190              	 .cfi_offset 5,-16
+ 191              	 .cfi_offset 6,-12
+ 192              	 .cfi_offset 7,-8
+ 193              	 .cfi_offset 14,-4
+ 194              	 .loc 1 108 8 view .LVU34
+ 195 0002 11F00404 	 ands r4,r1,#4
+ 104:simpleserial-aes.c ****     uint8_t req_len = 0;
+ 196              	 .loc 1 104 1 view .LVU35
+ 197 0006 0F46     	 mov r7,r1
+ 198 0008 1546     	 mov r5,r2
+ 199 000a 1E46     	 mov r6,r3
+ 200              	 .loc 1 108 8 view .LVU36
+ 201 000c 08D0     	 beq .L11
+ 109:simpleserial-aes.c ****         // Mask has variable length. First byte encodes the length
+ 110:simpleserial-aes.c ****         mask_len = buf[req_len];
+ 202              	 .loc 1 110 9 is_stmt 1 view .LVU37
+ 203              	 .loc 1 110 18 is_stmt 0 view .LVU38
+ 204 000e 1978     	 ldrb r1,[r3]
+ 205              	.LVL13:
+ 111:simpleserial-aes.c ****         req_len += 1 + mask_len;
+ 206              	 .loc 1 111 9 is_stmt 1 view .LVU39
+ 207              	 .loc 1 111 17 is_stmt 0 view .LVU40
+ 208 0010 4C1C     	 adds r4,r1,#1
+ 209 0012 E4B2     	 uxtb r4,r4
+ 210              	.LVL14:
+ 112:simpleserial-aes.c ****         if (req_len > len) {
+ 211              	 .loc 1 112 9 is_stmt 1 view .LVU41
+ 212              	 .loc 1 112 12 is_stmt 0 view .LVU42
+ 213 0014 9442     	 cmp r4,r2
+ 214 0016 1DD8     	 bhi .L12
+ 113:simpleserial-aes.c ****             return SS_ERR_LEN;
+ 114:simpleserial-aes.c ****         }
+ 115:simpleserial-aes.c ****         err = get_mask(buf + req_len - mask_len, mask_len);
+ 215              	 .loc 1 115 9 is_stmt 1 view .LVU43
+ 216              	.LVL15:
+ 217              	.LBB6:
+ 218              	.LBI6:
+  25:simpleserial-aes.c **** {
+ 219              	 .loc 1 25 9 view .LVU44
+ 220              	.LBB7:
+  27:simpleserial-aes.c ****   return 0x00;
+ 221              	 .loc 1 27 3 view .LVU45
+ 222              	.LBE7:
+ 223              	.LBE6:
+ 224              	 .loc 1 115 38 is_stmt 0 view .LVU46
+ 225 0018 601A     	 subs r0,r4,r1
+ 226              	.LVL16:
+ 227              	.LBB9:
+ 228              	.LBB8:
+  27:simpleserial-aes.c ****   return 0x00;
+ 229              	 .loc 1 27 3 view .LVU47
+ 230 001a 1844     	 add r0,r0,r3
+ 231 001c 0F4B     	 ldr r3,.L26
+ 232              	.LVL17:
+  27:simpleserial-aes.c ****   return 0x00;
+ 233              	 .loc 1 27 3 view .LVU48
+ 234 001e 9847     	 blx r3
+ 235              	.LVL18:
+  28:simpleserial-aes.c **** }
+ 236              	 .loc 1 28 3 is_stmt 1 view .LVU49
+  28:simpleserial-aes.c **** }
+ 237              	 .loc 1 28 3 is_stmt 0 view .LVU50
+ 238              	.LBE8:
+ 239              	.LBE9:
+ 116:simpleserial-aes.c ****         if (err)
+ 240              	 .loc 1 116 9 is_stmt 1 view .LVU51
+ 241              	.L11:
+ 117:simpleserial-aes.c ****             return err;
+ 118:simpleserial-aes.c ****     }
+ 119:simpleserial-aes.c **** 
+ 120:simpleserial-aes.c ****     if (scmd & 0x02) {
+ 242              	 .loc 1 120 5 view .LVU52
+ 243              	 .loc 1 120 8 is_stmt 0 view .LVU53
+ 244 0020 BA07     	 lsls r2,r7,#30
+ 245 0022 08D5     	 bpl .L13
+ 121:simpleserial-aes.c ****         req_len += 16;
+ 246              	 .loc 1 121 9 is_stmt 1 view .LVU54
+ 247              	 .loc 1 121 17 is_stmt 0 view .LVU55
+ 248 0024 1034     	 adds r4,r4,#16
+ 249              	.LVL19:
+ 250              	 .loc 1 121 17 view .LVU56
+ 251 0026 E4B2     	 uxtb r4,r4
+ 252              	.LVL20:
+ 122:simpleserial-aes.c ****         if (req_len > len) {
+ 253              	 .loc 1 122 9 is_stmt 1 view .LVU57
+ 254              	 .loc 1 122 12 is_stmt 0 view .LVU58
+ 255 0028 A542     	 cmp r5,r4
+ 256 002a 13D3     	 bcc .L12
+ 123:simpleserial-aes.c ****             return SS_ERR_LEN;
+ 124:simpleserial-aes.c ****         }
+ 125:simpleserial-aes.c ****         err = get_key(buf + req_len - 16, 16);
+ 257              	 .loc 1 125 9 is_stmt 1 view .LVU59
+ 258              	.LVL21:
+ 259              	.LBB10:
+ 260              	.LBI10:
+  31:simpleserial-aes.c **** {
+ 261              	 .loc 1 31 9 view .LVU60
+ 262              	.LBB11:
+  33:simpleserial-aes.c **** 	return 0x00;
+ 263              	 .loc 1 33 2 view .LVU61
+ 264              	.LBE11:
+ 265              	.LBE10:
+ 266              	 .loc 1 125 37 is_stmt 0 view .LVU62
+ 267 002c A4F11000 	 sub r0,r4,#16
+ 268              	.LBB13:
+ 269              	.LBB12:
+  33:simpleserial-aes.c **** 	return 0x00;
+ 270              	 .loc 1 33 2 view .LVU63
+ 271 0030 0B4B     	 ldr r3,.L26+4
+ 272 0032 3044     	 add r0,r0,r6
+ 273 0034 9847     	 blx r3
+ 274              	.LVL22:
+  34:simpleserial-aes.c **** }
+ 275              	 .loc 1 34 2 is_stmt 1 view .LVU64
+  34:simpleserial-aes.c **** }
+ 276              	 .loc 1 34 2 is_stmt 0 view .LVU65
+ 277              	.LBE12:
+ 278              	.LBE13:
+ 126:simpleserial-aes.c ****         if (err)
+ 279              	 .loc 1 126 9 is_stmt 1 view .LVU66
+ 280              	.L13:
+ 127:simpleserial-aes.c ****             return err;
+ 128:simpleserial-aes.c ****     }
+ 129:simpleserial-aes.c ****     if (scmd & 0x01) {
+ 281              	 .loc 1 129 5 view .LVU67
+ 282              	 .loc 1 129 8 is_stmt 0 view .LVU68
+ 283 0036 FB07     	 lsls r3,r7,#31
+ 284 0038 0AD5     	 bpl .L14
+ 130:simpleserial-aes.c ****         req_len += 16;
+ 285              	 .loc 1 130 9 is_stmt 1 view .LVU69
+ 286              	 .loc 1 130 17 is_stmt 0 view .LVU70
+ 287 003a 1034     	 adds r4,r4,#16
+ 288              	.LVL23:
+ 289              	 .loc 1 130 17 view .LVU71
+ 290 003c E4B2     	 uxtb r4,r4
+ 291              	.LVL24:
+ 131:simpleserial-aes.c ****         if (req_len > len) {
+ 292              	 .loc 1 131 9 is_stmt 1 view .LVU72
+ 293              	 .loc 1 131 12 is_stmt 0 view .LVU73
+ 294 003e A542     	 cmp r5,r4
+ 295 0040 08D3     	 bcc .L12
+ 132:simpleserial-aes.c ****             return SS_ERR_LEN;
+ 133:simpleserial-aes.c ****         }
+ 134:simpleserial-aes.c ****         err = get_pt(buf + req_len - 16, 16);
+ 296              	 .loc 1 134 9 is_stmt 1 view .LVU74
+ 297              	 .loc 1 134 36 is_stmt 0 view .LVU75
+ 298 0042 A4F11000 	 sub r0,r4,#16
+ 299              	 .loc 1 134 15 view .LVU76
+ 300 0046 074B     	 ldr r3,.L26+8
+ 301 0048 1021     	 movs r1,#16
+ 302 004a 3044     	 add r0,r0,r6
+ 303 004c 9847     	 blx r3
+ 304              	.LVL25:
+ 135:simpleserial-aes.c ****         if (err)
+ 305              	 .loc 1 135 9 is_stmt 1 view .LVU77
+ 306              	 .loc 1 135 12 is_stmt 0 view .LVU78
+ 307 004e 10B9     	 cbnz r0,.L15
+ 308              	.LVL26:
+ 309              	.L14:
+ 136:simpleserial-aes.c ****             return err;
+ 137:simpleserial-aes.c ****     }
+ 138:simpleserial-aes.c **** 
+ 139:simpleserial-aes.c ****     if (len != req_len) {
+ 310              	 .loc 1 139 5 is_stmt 1 view .LVU79
+ 311              	 .loc 1 139 8 is_stmt 0 view .LVU80
+ 312 0050 AC42     	 cmp r4,r5
+ 313 0052 01D0     	 beq .L16
+ 314              	.L12:
+ 140:simpleserial-aes.c ****         return SS_ERR_LEN;
+ 315              	 .loc 1 140 9 is_stmt 1 view .LVU81
+ 316              	 .loc 1 140 16 is_stmt 0 view .LVU82
+ 317 0054 0420     	 movs r0,#4
+ 318              	.L15:
+ 141:simpleserial-aes.c ****     }
+ 142:simpleserial-aes.c **** 
+ 143:simpleserial-aes.c ****     return 0x00;
+ 144:simpleserial-aes.c **** 
+ 145:simpleserial-aes.c **** }
+ 319              	 .loc 1 145 1 view .LVU83
+ 320 0056 F8BD     	 pop {r3,r4,r5,r6,r7,pc}
+ 321              	.LVL27:
+ 322              	.L16:
+ 143:simpleserial-aes.c **** 
+ 323              	 .loc 1 143 12 view .LVU84
+ 324 0058 0020     	 movs r0,#0
+ 325 005a FCE7     	 b .L15
+ 326              	.L27:
+ 327              	 .align 2
+ 328              	.L26:
+ 329 005c 00000000 	 .word aes_indep_mask
+ 330 0060 00000000 	 .word aes_indep_key
+ 331 0064 00000000 	 .word get_pt
+ 332              	 .cfi_endproc
+ 333              	.LFE6:
+ 335              	 .section .text.reset,"ax",%progbits
+ 336              	 .align 1
+ 337              	 .global reset
+ 338              	 .syntax unified
+ 339              	 .thumb
+ 340              	 .thumb_func
+ 341              	 .fpu softvfp
+ 343              	reset:
+ 344              	.LVL28:
+ 345              	.LFB3:
+  71:simpleserial-aes.c ****     // Reset key here if needed
+ 346              	 .loc 1 71 1 is_stmt 1 view-0
+ 347              	 .cfi_startproc
+ 348              	 
+ 349              	 
+ 350              	 
+  73:simpleserial-aes.c **** }
+ 351              	 .loc 1 73 2 view .LVU86
+  74:simpleserial-aes.c **** 
+ 352              	 .loc 1 74 1 is_stmt 0 view .LVU87
+ 353 0000 0020     	 movs r0,#0
+ 354              	.LVL29:
+  74:simpleserial-aes.c **** 
+ 355              	 .loc 1 74 1 view .LVU88
+ 356 0002 7047     	 bx lr
+ 357              	 .cfi_endproc
+ 358              	.LFE3:
+ 360              	 .section .text.enc_multi_getpt,"ax",%progbits
+ 361              	 .align 1
+ 362              	 .global enc_multi_getpt
+ 363              	 .syntax unified
+ 364              	 .thumb
+ 365              	 .thumb_func
+ 366              	 .fpu softvfp
+ 368              	enc_multi_getpt:
+ 369              	.LVL30:
+ 370              	.LFB4:
+  79:simpleserial-aes.c ****     aes_indep_enc_pretrigger(pt);
+ 371              	 .loc 1 79 1 is_stmt 1 view-0
+ 372              	 .cfi_startproc
+ 373              	 
+ 374              	 
+  80:simpleserial-aes.c **** 
+ 375              	 .loc 1 80 5 view .LVU90
+  79:simpleserial-aes.c ****     aes_indep_enc_pretrigger(pt);
+ 376              	 .loc 1 79 1 is_stmt 0 view .LVU91
+ 377 0000 2DE9F041 	 push {r4,r5,r6,r7,r8,lr}
+ 378              	.LCFI4:
+ 379              	 .cfi_def_cfa_offset 24
+ 380              	 .cfi_offset 4,-24
+ 381              	 .cfi_offset 5,-20
+ 382              	 .cfi_offset 6,-16
+ 383              	 .cfi_offset 7,-12
+ 384              	 .cfi_offset 8,-8
+ 385              	 .cfi_offset 14,-4
+  80:simpleserial-aes.c **** 
+ 386              	 .loc 1 80 5 view .LVU92
+ 387 0004 0E4B     	 ldr r3,.L32
+ 388              	.LBB14:
+  82:simpleserial-aes.c ****         trigger_high();
+ 389              	 .loc 1 82 31 view .LVU93
+ 390 0006 0F4E     	 ldr r6,.L32+4
+ 391              	.LBB15:
+  83:simpleserial-aes.c ****         aes_indep_enc(pt);
+ 392              	 .loc 1 83 9 view .LVU94
+ 393 0008 0F4F     	 ldr r7,.L32+8
+  84:simpleserial-aes.c ****         trigger_low();
+ 394              	 .loc 1 84 9 view .LVU95
+ 395 000a DFF84080 	 ldr r8,.L32+12
+ 396              	.LBE15:
+ 397              	.LBE14:
+  79:simpleserial-aes.c ****     aes_indep_enc_pretrigger(pt);
+ 398              	 .loc 1 79 1 view .LVU96
+ 399 000e 0446     	 mov r4,r0
+  80:simpleserial-aes.c **** 
+ 400              	 .loc 1 80 5 view .LVU97
+ 401 0010 9847     	 blx r3
+ 402              	.LVL31:
+  82:simpleserial-aes.c ****         trigger_high();
+ 403              	 .loc 1 82 5 is_stmt 1 view .LVU98
+ 404              	.LBB17:
+  82:simpleserial-aes.c ****         trigger_high();
+ 405              	 .loc 1 82 9 view .LVU99
+  82:simpleserial-aes.c ****         trigger_high();
+ 406              	 .loc 1 82 22 is_stmt 0 view .LVU100
+ 407 0012 0025     	 movs r5,#0
+ 408              	.LVL32:
+ 409              	.L30:
+  82:simpleserial-aes.c ****         trigger_high();
+ 410              	 .loc 1 82 29 is_stmt 1 discriminator 1 view .LVU101
+  82:simpleserial-aes.c ****         trigger_high();
+ 411              	 .loc 1 82 31 is_stmt 0 discriminator 1 view .LVU102
+ 412 0014 3388     	 ldrh r3,[r6]
+  82:simpleserial-aes.c ****         trigger_high();
+ 413              	 .loc 1 82 5 discriminator 1 view .LVU103
+ 414 0016 AB42     	 cmp r3,r5
+ 415 0018 0AD8     	 bhi .L31
+ 416              	.LBE17:
+  88:simpleserial-aes.c **** 	simpleserial_put('r', 16, pt);
+ 417              	 .loc 1 88 5 is_stmt 1 view .LVU104
+ 418 001a 2046     	 mov r0,r4
+ 419 001c 0C4B     	 ldr r3,.L32+16
+ 420 001e 9847     	 blx r3
+ 421              	.LVL33:
+  89:simpleserial-aes.c ****     return 0;
+ 422              	 .loc 1 89 2 view .LVU105
+ 423 0020 0C4B     	 ldr r3,.L32+20
+ 424 0022 2246     	 mov r2,r4
+ 425 0024 1021     	 movs r1,#16
+ 426 0026 7220     	 movs r0,#114
+ 427 0028 9847     	 blx r3
+ 428              	.LVL34:
+  90:simpleserial-aes.c **** }
+ 429              	 .loc 1 90 5 view .LVU106
+  91:simpleserial-aes.c **** 
+ 430              	 .loc 1 91 1 is_stmt 0 view .LVU107
+ 431 002a 0020     	 movs r0,#0
+ 432 002c BDE8F081 	 pop {r4,r5,r6,r7,r8,pc}
+ 433              	.LVL35:
+ 434              	.L31:
+ 435              	.LBB18:
+ 436              	.LBB16:
+  83:simpleserial-aes.c ****         aes_indep_enc(pt);
+ 437              	 .loc 1 83 9 is_stmt 1 discriminator 3 view .LVU108
+ 438 0030 B847     	 blx r7
+ 439              	.LVL36:
+  84:simpleserial-aes.c ****         trigger_low();
+ 440              	 .loc 1 84 9 discriminator 3 view .LVU109
+ 441 0032 2046     	 mov r0,r4
+ 442 0034 C047     	 blx r8
+ 443              	.LVL37:
+  85:simpleserial-aes.c ****     }
+ 444              	 .loc 1 85 9 discriminator 3 view .LVU110
+ 445 0036 084B     	 ldr r3,.L32+24
+ 446 0038 9847     	 blx r3
+ 447              	.LVL38:
+ 448              	.LBE16:
+  82:simpleserial-aes.c ****         trigger_high();
+ 449              	 .loc 1 82 56 discriminator 3 view .LVU111
+  82:simpleserial-aes.c ****         trigger_high();
+ 450              	 .loc 1 82 57 is_stmt 0 discriminator 3 view .LVU112
+ 451 003a 0135     	 adds r5,r5,#1
+ 452              	.LVL39:
+  82:simpleserial-aes.c ****         trigger_high();
+ 453              	 .loc 1 82 57 discriminator 3 view .LVU113
+ 454 003c EAE7     	 b .L30
+ 455              	.L33:
+ 456 003e 00BF     	 .align 2
+ 457              	.L32:
+ 458 0040 00000000 	 .word aes_indep_enc_pretrigger
+ 459 0044 00000000 	 .word .LANCHOR0
+ 460 0048 00000000 	 .word trigger_high
+ 461 004c 00000000 	 .word aes_indep_enc
+ 462 0050 00000000 	 .word aes_indep_enc_posttrigger
+ 463 0054 00000000 	 .word simpleserial_put
+ 464 0058 00000000 	 .word trigger_low
+ 465              	.LBE18:
+ 466              	 .cfi_endproc
+ 467              	.LFE4:
+ 469              	 .section .text.enc_multi_setnum,"ax",%progbits
+ 470              	 .align 1
+ 471              	 .global enc_multi_setnum
+ 472              	 .syntax unified
+ 473              	 .thumb
+ 474              	 .thumb_func
+ 475              	 .fpu softvfp
+ 477              	enc_multi_setnum:
+ 478              	.LVL40:
+ 479              	.LFB5:
+  94:simpleserial-aes.c ****     //Assumes user entered a number like [0, 200] to mean "200"
+ 480              	 .loc 1 94 1 is_stmt 1 view-0
+ 481              	 .cfi_startproc
+ 482              	 
+ 483              	 
+ 484              	 
+  97:simpleserial-aes.c ****     num_encryption_rounds |= t[0] << 8;
+ 485              	 .loc 1 97 5 view .LVU115
+  98:simpleserial-aes.c ****     return 0;
+ 486              	 .loc 1 98 5 view .LVU116
+  98:simpleserial-aes.c ****     return 0;
+ 487              	 .loc 1 98 27 is_stmt 0 view .LVU117
+ 488 0000 0388     	 ldrh r3,[r0]
+ 489 0002 024A     	 ldr r2,.L35
+ 490 0004 5BBA     	 rev16 r3,r3
+ 491 0006 1380     	 strh r3,[r2]
+  99:simpleserial-aes.c **** }
+ 492              	 .loc 1 99 5 is_stmt 1 view .LVU118
+ 100:simpleserial-aes.c **** 
+ 493              	 .loc 1 100 1 is_stmt 0 view .LVU119
+ 494 0008 0020     	 movs r0,#0
+ 495              	.LVL41:
+ 100:simpleserial-aes.c **** 
+ 496              	 .loc 1 100 1 view .LVU120
+ 497 000a 7047     	 bx lr
+ 498              	.L36:
+ 499              	 .align 2
+ 500              	.L35:
+ 501 000c 00000000 	 .word .LANCHOR0
+ 502              	 .cfi_endproc
+ 503              	.LFE5:
+ 505              	 .section .rodata.main.str1.1,"aMS",%progbits,1
+ 506              	.LC0:
+ 507 0000 2B7E1516 	 .ascii "+~\025\026(\256\322\246\253\367\025\210\011\317O<\000"
+ 507      28AED2A6 
+ 507      ABF71588 
+ 507      09CF4F3C 
+ 507      00
+ 508              	 .section .text.startup.main,"ax",%progbits
+ 509              	 .align 1
+ 510              	 .global main
+ 511              	 .syntax unified
+ 512              	 .thumb
+ 513              	 .thumb_func
+ 514              	 .fpu softvfp
+ 516              	main:
+ 517              	.LFB7:
+ 146:simpleserial-aes.c **** #endif
+ 147:simpleserial-aes.c **** 
+ 148:simpleserial-aes.c **** int main(void)
+ 149:simpleserial-aes.c **** {
+ 518              	 .loc 1 149 1 is_stmt 1 view-0
+ 519              	 .cfi_startproc
+ 520              	 
+ 521              	 
+ 522              	 
+ 150:simpleserial-aes.c **** 	uint8_t tmp[KEY_LENGTH] = {DEFAULT_KEY};
+ 523              	 .loc 1 150 2 view .LVU122
+ 149:simpleserial-aes.c **** 	uint8_t tmp[KEY_LENGTH] = {DEFAULT_KEY};
+ 524              	 .loc 1 149 1 is_stmt 0 view .LVU123
+ 525 0000 1FB5     	 push {r0,r1,r2,r3,r4,lr}
+ 526              	.LCFI5:
+ 527              	 .cfi_def_cfa_offset 24
+ 528              	 .cfi_offset 14,-4
+ 529              	 .loc 1 150 10 view .LVU124
+ 530 0002 174B     	 ldr r3,.L41
+ 531 0004 6A46     	 mov r2,sp
+ 532 0006 03F11006 	 add r6,r3,#16
+ 533 000a 1546     	 mov r5,r2
+ 534              	.L38:
+ 535 000c 1868     	 ldr r0,[r3]
+ 536 000e 5968     	 ldr r1,[r3,#4]
+ 537 0010 1446     	 mov r4,r2
+ 538 0012 03C4     	 stmia r4!,{r0,r1}
+ 539 0014 0833     	 adds r3,r3,#8
+ 540 0016 B342     	 cmp r3,r6
+ 541 0018 2246     	 mov r2,r4
+ 542 001a F7D1     	 bne .L38
+ 151:simpleserial-aes.c **** 
+ 152:simpleserial-aes.c ****     platform_init();
+ 543              	 .loc 1 152 5 is_stmt 1 view .LVU125
+ 544 001c 114B     	 ldr r3,.L41+4
+ 153:simpleserial-aes.c ****     init_uart();
+ 154:simpleserial-aes.c ****     trigger_setup();
+ 155:simpleserial-aes.c **** 
+ 156:simpleserial-aes.c **** 	aes_indep_init();
+ 157:simpleserial-aes.c **** 	aes_indep_key(tmp);
+ 158:simpleserial-aes.c **** 
+ 159:simpleserial-aes.c ****     /* Uncomment this to get a HELLO message for debug */
+ 160:simpleserial-aes.c **** 
+ 161:simpleserial-aes.c ****      putch('h');
+ 545              	 .loc 1 161 6 is_stmt 0 view .LVU126
+ 546 001e 124C     	 ldr r4,.L41+8
+ 152:simpleserial-aes.c ****     init_uart();
+ 547              	 .loc 1 152 5 view .LVU127
+ 548 0020 9847     	 blx r3
+ 549              	.LVL42:
+ 153:simpleserial-aes.c ****     init_uart();
+ 550              	 .loc 1 153 5 is_stmt 1 view .LVU128
+ 551 0022 124B     	 ldr r3,.L41+12
+ 552 0024 9847     	 blx r3
+ 553              	.LVL43:
+ 154:simpleserial-aes.c **** 
+ 554              	 .loc 1 154 5 view .LVU129
+ 555 0026 124B     	 ldr r3,.L41+16
+ 556 0028 9847     	 blx r3
+ 557              	.LVL44:
+ 156:simpleserial-aes.c **** 	aes_indep_key(tmp);
+ 558              	 .loc 1 156 2 view .LVU130
+ 559 002a 124B     	 ldr r3,.L41+20
+ 560 002c 9847     	 blx r3
+ 561              	.LVL45:
+ 157:simpleserial-aes.c **** 
+ 562              	 .loc 1 157 2 view .LVU131
+ 563 002e 124B     	 ldr r3,.L41+24
+ 564 0030 2846     	 mov r0,r5
+ 565 0032 9847     	 blx r3
+ 566              	.LVL46:
+ 567              	 .loc 1 161 6 view .LVU132
+ 568 0034 6820     	 movs r0,#104
+ 569 0036 A047     	 blx r4
+ 570              	.LVL47:
+ 162:simpleserial-aes.c ****      putch('e');
+ 571              	 .loc 1 162 6 view .LVU133
+ 572 0038 6520     	 movs r0,#101
+ 573 003a A047     	 blx r4
+ 574              	.LVL48:
+ 163:simpleserial-aes.c ****      putch('l');
+ 575              	 .loc 1 163 6 view .LVU134
+ 576 003c 6C20     	 movs r0,#108
+ 577 003e A047     	 blx r4
+ 578              	.LVL49:
+ 164:simpleserial-aes.c ****      putch('l');
+ 579              	 .loc 1 164 6 view .LVU135
+ 580 0040 6C20     	 movs r0,#108
+ 581 0042 A047     	 blx r4
+ 582              	.LVL50:
+ 165:simpleserial-aes.c ****      putch('o');
+ 583              	 .loc 1 165 6 view .LVU136
+ 584 0044 6F20     	 movs r0,#111
+ 585 0046 A047     	 blx r4
+ 586              	.LVL51:
+ 166:simpleserial-aes.c ****      putch('\n');
+ 587              	 .loc 1 166 6 view .LVU137
+ 588 0048 0A20     	 movs r0,#10
+ 589 004a A047     	 blx r4
+ 590              	.LVL52:
+ 167:simpleserial-aes.c **** 
+ 168:simpleserial-aes.c **** 	simpleserial_init();
+ 591              	 .loc 1 168 2 view .LVU138
+ 592 004c 0B4B     	 ldr r3,.L41+28
+ 169:simpleserial-aes.c ****     #if SS_VER == SS_VER_2_1
+ 170:simpleserial-aes.c ****     simpleserial_addcmd(0x01, 16, aes);
+ 171:simpleserial-aes.c ****     #else
+ 172:simpleserial-aes.c ****     simpleserial_addcmd('k', 16, get_key);
+ 173:simpleserial-aes.c ****     simpleserial_addcmd('p', 16,  get_pt);
+ 174:simpleserial-aes.c ****     simpleserial_addcmd('x',  0,   reset);
+ 175:simpleserial-aes.c ****     simpleserial_addcmd_flags('m', 18, get_mask, CMD_FLAG_LEN);
+ 176:simpleserial-aes.c ****     simpleserial_addcmd('s', 2, enc_multi_setnum);
+ 177:simpleserial-aes.c ****     simpleserial_addcmd('f', 16, enc_multi_getpt);
+ 178:simpleserial-aes.c ****     #endif
+ 179:simpleserial-aes.c ****     while(1)
+ 180:simpleserial-aes.c ****         simpleserial_get();
+ 593              	 .loc 1 180 9 is_stmt 0 view .LVU139
+ 594 004e 0C4C     	 ldr r4,.L41+32
+ 168:simpleserial-aes.c ****     #if SS_VER == SS_VER_2_1
+ 595              	 .loc 1 168 2 view .LVU140
+ 596 0050 9847     	 blx r3
+ 597              	.LVL53:
+ 170:simpleserial-aes.c ****     #else
+ 598              	 .loc 1 170 5 is_stmt 1 view .LVU141
+ 599 0052 0C4A     	 ldr r2,.L41+36
+ 600 0054 0C4B     	 ldr r3,.L41+40
+ 601 0056 1021     	 movs r1,#16
+ 602 0058 0120     	 movs r0,#1
+ 603 005a 9847     	 blx r3
+ 604              	.LVL54:
+ 605              	.L39:
+ 179:simpleserial-aes.c ****         simpleserial_get();
+ 606              	 .loc 1 179 5 discriminator 1 view .LVU142
+ 607              	 .loc 1 180 9 discriminator 1 view .LVU143
+ 608 005c A047     	 blx r4
+ 609              	.LVL55:
+ 179:simpleserial-aes.c ****         simpleserial_get();
+ 610              	 .loc 1 179 10 discriminator 1 view .LVU144
+ 611 005e FDE7     	 b .L39
+ 612              	.L42:
+ 613              	 .align 2
+ 614              	.L41:
+ 615 0060 00000000 	 .word .LC0
+ 616 0064 00000000 	 .word platform_init
+ 617 0068 00000000 	 .word putch
+ 618 006c 00000000 	 .word init_uart
+ 619 0070 00000000 	 .word trigger_setup
+ 620 0074 00000000 	 .word aes_indep_init
+ 621 0078 00000000 	 .word aes_indep_key
+ 622 007c 00000000 	 .word simpleserial_init
+ 623 0080 00000000 	 .word simpleserial_get
+ 624 0084 00000000 	 .word aes
+ 625 0088 00000000 	 .word simpleserial_addcmd
+ 626              	 .cfi_endproc
+ 627              	.LFE7:
+ 629              	 .section .data.num_encryption_rounds,"aw"
+ 630              	 .align 1
+ 631              	 .set .LANCHOR0,.+0
+ 634              	num_encryption_rounds:
+ 635 0000 0A00     	 .short 10
+ 636              	 .text
+ 637              	.Letext0:
+ 638              	 .file 2 "c:\\chipwh~2\\cw\\home\\portable\\armgcc\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 639              	 .file 3 "c:\\chipwh~2\\cw\\home\\portable\\armgcc\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 640              	 .file 4 ".././hal/hal.h"
+ 641              	 .file 5 ".././crypto/aes-independant.h"
+ 642              	 .file 6 ".././simpleserial/simpleserial.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 simpleserial-aes.c
+    {standard input}:16     .text.get_mask:00000000 $t
+    {standard input}:24     .text.get_mask:00000000 get_mask
+    {standard input}:50     .text.get_mask:0000000c $d
+    {standard input}:55     .text.get_key:00000000 $t
+    {standard input}:62     .text.get_key:00000000 get_key
+    {standard input}:87     .text.get_key:0000000c $d
+    {standard input}:92     .text.get_pt:00000000 $t
+    {standard input}:99     .text.get_pt:00000000 get_pt
+    {standard input}:156    .text.get_pt:0000002c $d
+    {standard input}:166    .text.aes:00000000 $t
+    {standard input}:173    .text.aes:00000000 aes
+    {standard input}:329    .text.aes:0000005c $d
+    {standard input}:336    .text.reset:00000000 $t
+    {standard input}:343    .text.reset:00000000 reset
+    {standard input}:361    .text.enc_multi_getpt:00000000 $t
+    {standard input}:368    .text.enc_multi_getpt:00000000 enc_multi_getpt
+    {standard input}:458    .text.enc_multi_getpt:00000040 $d
+    {standard input}:470    .text.enc_multi_setnum:00000000 $t
+    {standard input}:477    .text.enc_multi_setnum:00000000 enc_multi_setnum
+    {standard input}:501    .text.enc_multi_setnum:0000000c $d
+    {standard input}:509    .text.startup.main:00000000 $t
+    {standard input}:516    .text.startup.main:00000000 main
+    {standard input}:615    .text.startup.main:00000060 $d
+    {standard input}:630    .data.num_encryption_rounds:00000000 $d
+    {standard input}:634    .data.num_encryption_rounds:00000000 num_encryption_rounds
+                           .group:00000000 wm4.0.545a0e1134fc651afe6e71660705947f
+                           .group:00000000 wm4._newlib_version.h.4.1ef4e12f167f8b69d7c30054be56050d
+                           .group:00000000 wm4.features.h.33.5bd1eea2d80518b50f7af0b5ce6750e0
+                           .group:00000000 wm4._default_types.h.15.247e5cd201eca3442cbf5404108c4935
+                           .group:00000000 wm4._intsup.h.10.48bafbb683905c4daa4565a85aeeb264
+                           .group:00000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:00000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:00000000 wm4.aesindependant.h.40.fa1658f64cee72e2346013cd84c09816
+                           .group:00000000 wm4.hal.h.20.4ce509bfa0d05e14954b01d3e94d8ba2
+                           .group:00000000 wm4.hal.h.200.484f385f7b1f39d9cedef3483d17ba2c
+                           .group:00000000 wm4.simpleserial.h.5.c96c6e95969d4c6e0b7b683e18b3c16d
+                           .group:00000000 wm4.ieeefp.h.77.f33a4dce62116f6f5175ff8bae57a54c
+                           .group:00000000 wm4.newlib.h.8.7cb3972cd43265932d4782d5eb589854
+                           .group:00000000 wm4.config.h.224.c701144a7b0518c6ee9b9b5465b79f81
+                           .group:00000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
+                           .group:00000000 wm4.stdlib.h.13.4ed386f5c1a80d71e72172885d946ef2
+                           .group:00000000 wm4.stddef.h.181.13772e73e5434e8cc4fafaaddad2b5da
+                           .group:00000000 wm4.stddef.h.39.1bfffcccc3897d82880a055878218da6
+                           .group:00000000 wm4._types.h.20.dd0d04dca3800a0d2a6129b87f3adbb2
+                           .group:00000000 wm4.stddef.h.155.3588ebfdd1e8c7ede80509bb9c3b8009
+                           .group:00000000 wm4._types.h.127.34941de1b2539d59d5cac00e0dd27a45
+                           .group:00000000 wm4.reent.h.17.e292bf8b0bec6c96e131a54347145a30
+                           .group:00000000 wm4.lock.h.2.1461d1fff82dffe8bfddc23307f6484f
+                           .group:00000000 wm4.reent.h.77.dcd6129ff07fe81bd5636db29abe53b2
+                           .group:00000000 wm4.cdefs.h.49.3d0fe8ea14e93bda8c589d4f684b21b8
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.56.f4862cfbf4363a1db01842d5bdf72c18
+
+UNDEFINED SYMBOLS
+aes_indep_mask
+aes_indep_key
+aes_indep_enc_pretrigger
+trigger_high
+aes_indep_enc
+trigger_low
+aes_indep_enc_posttrigger
+simpleserial_put
+platform_init
+putch
+init_uart
+trigger_setup
+aes_indep_init
+simpleserial_init
+simpleserial_get
+simpleserial_addcmd
