@@ -1,0 +1,224 @@
+Subject: [PATCH] JTAG tests - TDO clocks, LA offset support
+
+---
+ fpga/hdl/cwhusky_top.v       | 82 ++++++++++++++++++++++++++++++++++++
+ fpga/hdl/openadc_interface.v |  3 +-
+ fpga/hdl/reg_chipwhisperer.v |  6 ++-
+ fpga/hdl/reg_la.v            |  3 +-
+ 4 files changed, 90 insertions(+), 4 deletions(-)
+
+diff --git a/fpga/hdl/cwhusky_top.v b/fpga/hdl/cwhusky_top.v
+index 46f0a1b..2789ce6 100644
+--- a/fpga/hdl/cwhusky_top.v
++++ b/fpga/hdl/cwhusky_top.v
+@@ -187,6 +187,7 @@ module cwhusky_top(
+    wire glitch_trigger;
+    wire glitch_trigger_manual_sourceclock;
+    wire capture_active;
++   wire capture_go;
+    wire enable_avrprog;
+    wire [11:0] ADC_data;
+ 
+@@ -464,6 +465,7 @@ module cwhusky_top(
+         .stream_segment_available (stream_segment_available),
+ 
+         .capture_active         (capture_active),
++        .capture_go             (capture_go),
+         .trigger_in             (edge_trigger_line),
+ 
+         .flash_pattern          (flash_pattern),
+@@ -505,6 +507,7 @@ module cwhusky_top(
+         .VMAG_D         (VMAG_D)
+    );
+ 
++   wire [1:0] userio_jtag_clocks;
+ 
+    reg_chipwhisperer  #(
+         .pBYTECNT_SIZE                  (pBYTECNT_SIZE),
+@@ -587,6 +590,7 @@ module cwhusky_top(
+         .userio_target_debug    (userio_target_debug),
+         .userio_target_debug_swd(userio_target_debug_swd),
+         .userio_fpga_debug_select (userio_fpga_debug_select),
++        .userio_jtag_clocks     (userio_jtag_clocks),
+         .userio_d               (USERIO_D),
+         .userio_clk             (USERIO_CLK),
+ 
+@@ -606,10 +610,87 @@ module cwhusky_top(
+         .trig_glitch_o_mcx      (TRIG_GLITCHOUT)
+    );
+ 
++   // 01 = clocks output
++   // 10 = glitch on TCK
++   // 11 = reserved
++   wire jtag_clock_tdi, jtag_clock_tck;
++   wire jtag_clock_pllfb;
++
++    //PLL VCO needs to be in 800-1600 MHz range.
++    // XDC sets the PLL input to 200 MHz, which Vivado "forces" onto this... right now we
++    // just use a multiplier that gets us to upper end of PLL range, and hopes you can use
++    // it at slower speeds.
++    PLLE2_BASE #(
++       .BANDWIDTH("OPTIMIZED"),  // OPTIMIZED, HIGH, LOW
++       .CLKFBOUT_MULT(8),        // Multiply value for all CLKOUT, (2-64) //ORIGINALLY THIS WAS 8, CHANGE BACK LATER
++       .CLKFBOUT_PHASE(0.0),     // Phase offset in degrees of CLKFB, (-360.000-360.000).
++       .CLKIN1_PERIOD(0.0),      // Input clock period in ns to ps resolution (i.e. 33.333 is 30 MHz) (IGNORED)
++       // CLKOUT0_DIVIDE - CLKOUT5_DIVIDE: Divide amount for each CLKOUT (1-128)
++       .CLKOUT0_DIVIDE(8), //8
++       .CLKOUT1_DIVIDE(16), //16
++       //.CLKOUT2_DIVIDE(1),
++       //.CLKOUT3_DIVIDE(1),
++       //.CLKOUT4_DIVIDE(1),
++       //.CLKOUT5_DIVIDE(1),
++       // CLKOUT0_DUTY_CYCLE - CLKOUT5_DUTY_CYCLE: Duty cycle for each CLKOUT (0.001-0.999).
++       .CLKOUT0_DUTY_CYCLE(0.5),
++       .CLKOUT1_DUTY_CYCLE(0.5),
++       //.CLKOUT2_DUTY_CYCLE(0.5),
++       //.CLKOUT3_DUTY_CYCLE(0.5),
++       //.CLKOUT4_DUTY_CYCLE(0.5),
++       //.CLKOUT5_DUTY_CYCLE(0.5),
++       // CLKOUT0_PHASE - CLKOUT5_PHASE: Phase offset for each CLKOUT (-360.000-360.000).
++       .CLKOUT0_PHASE(0.0),
++       .CLKOUT1_PHASE(90.0),
++       //.CLKOUT2_PHASE(0.0),
++       //.CLKOUT3_PHASE(0.0),
++       //.CLKOUT4_PHASE(0.0),
++       //.CLKOUT5_PHASE(0.0),
++       .DIVCLK_DIVIDE(1),        // Master division value, (1-56)
++       .REF_JITTER1(0.0),        // Reference input jitter in UI, (0.000-0.999).
++       .STARTUP_WAIT("FALSE")    // Delay DONE until PLL Locks, ("TRUE"/"FALSE")
++    )
++    pll_jtag_clock (
++       // Clock Outputs: 1-bit (each) output: User configurable clock outputs
++       .CLKOUT0(jtag_clock_tck),   // 1-bit output: CLKOUT0
++       .CLKOUT1(jtag_clock_tdi),   // 1-bit output: CLKOUT1
++       //.CLKOUT2(CLKOUT2),   // 1-bit output: CLKOUT2
++       //.CLKOUT3(CLKOUT3),   // 1-bit output: CLKOUT3
++       //.CLKOUT4(CLKOUT4),   // 1-bit output: CLKOUT4
++       //.CLKOUT5(CLKOUT5),   // 1-bit output: CLKOUT5
++       // Feedback Clocks: 1-bit (each) output: Clock feedback ports
++       .CLKFBOUT(jtag_clock_pllfb), // 1-bit output: Feedback clock
++       //.LOCKED(LOCKED),     // 1-bit output: LOCK
++       .CLKIN1(pll_fpga_clk),     // 1-bit input: Input clock
++       // Control Ports: 1-bit (each) input: PLL control ports
++       .PWRDWN(1'b0),     // 1-bit input: Power-down
++       .RST(1'b0),           // 1-bit input: Reset
++       // Feedback Clocks: 1-bit (each) input: Clock feedback ports
++       .CLKFBIN(jtag_clock_pllfb)    // 1-bit input: Feedback clock
++    );
++    
+    assign userio_drive_data = userio_target_debug? {target_MOSI, // carries TDI on USERIO_D7
+                                                     target_PDID, // carries TMS/SWDIO on USERIO_D6
+                                                     target_SCK,  // carries TCLK/SWDCLK on USERIO_D5
+                                                     5'b0         // USERIO_D4:D0 undriven (TDO input on USERIO_D3)
++                                                   } : (userio_jtag_clocks[0])? {
++                                                   jtag_clock_tdi, //jtag TDI pin
++                                                   userio_drive_data_reg[6], //TMS pin
++                                                   jtag_clock_tck, //TCK
++                                                   userio_drive_data_reg[4],
++                                                   userio_drive_data_reg[3], //TDO
++                                                   userio_drive_data_reg[2],
++                                                   userio_drive_data_reg[1],
++                                                   userio_drive_data_reg[0]                                                   
++                                                   } : (userio_jtag_clocks[1])? {
++                                                   jtag_clock_tdi, //jtag TDI pin
++                                                   userio_drive_data_reg[6], //TMS pin
++                                                   glitchclk, //TCK
++                                                   userio_drive_data_reg[4],
++                                                   userio_drive_data_reg[3], //TDO
++                                                   userio_drive_data_reg[2],
++                                                   userio_drive_data_reg[1],
++                                                   userio_drive_data_reg[0]                                                     
+                                                    } : userio_drive_data_reg;
+ 
+    assign USERIO_CLK = userio_target_debug? FPGA_BONUS1 : 1'bz;
+@@ -716,6 +797,7 @@ module cwhusky_top(
+         .glitch_trigger_manual_sourceclock (glitch_trigger_manual_sourceclock),
+         .glitch_trigger         (glitch_trigger),
+         .capture_active         (capture_active),
++        .adc_capture_started    (capture_go),
+         .capture_start          (), // unused
+         .capture_done           (), // unused
+ 
+diff --git a/fpga/hdl/openadc_interface.v b/fpga/hdl/openadc_interface.v
+index 2077ec1..aac43df 100644
+--- a/fpga/hdl/openadc_interface.v
++++ b/fpga/hdl/openadc_interface.v
+@@ -69,6 +69,7 @@ module openadc_interface #(
+     output wire                         stream_segment_available,
+ 
+     output wire                         capture_active,
++    output wire                         capture_go,
+     input  wire                         trigger_in,
+ 
+     output reg                          flash_pattern,
+@@ -137,7 +138,7 @@ module openadc_interface #(
+     wire        ADC_clk_sample;
+     wire        armed;
+ 
+-    wire       capture_go;
++    //wire       capture_go;
+     wire       adc_capture_done;
+     wire       reset;
+ 
+diff --git a/fpga/hdl/reg_chipwhisperer.v b/fpga/hdl/reg_chipwhisperer.v
+index a22dee5..5dbf03d 100644
+--- a/fpga/hdl/reg_chipwhisperer.v
++++ b/fpga/hdl/reg_chipwhisperer.v
+@@ -115,6 +115,7 @@ module reg_chipwhisperer #(
+    output reg                      userio_target_debug,
+    output reg                      userio_target_debug_swd,
+    output reg [3:0]                userio_fpga_debug_select,
++   output reg [1:0]                userio_jtag_clocks,
+    input  wire [pUSERIO_WIDTH-1:0] userio_d,
+    input  wire                     userio_clk,
+ 
+@@ -584,7 +585,7 @@ CW_IOROUTE_ADDR, address 55 (0x37) - GPIO Pin Routing [8 bytes]
+            `CW_IOREAD_ADDR:             reg_datao_reg = registers_ioread[reg_bytecnt*8 +: 8];
+ 
+            `USERIO_CW_DRIVEN:           reg_datao_reg = userio_cwdriven[reg_bytecnt*8 +: 8];
+-           `USERIO_DEBUG_DRIVEN:        reg_datao_reg = {5'b0, userio_target_debug_swd, userio_target_debug, userio_fpga_debug};
++           `USERIO_DEBUG_DRIVEN:        reg_datao_reg = {3'b0, userio_jtag_clocks, userio_target_debug_swd, userio_target_debug, userio_fpga_debug};
+            `USERIO_DEBUG_SELECT:        reg_datao_reg = {4'b0, userio_fpga_debug_select};
+            `USERIO_READ:                reg_datao_reg = userio_read[reg_bytecnt*8 +: 8];
+ 
+@@ -620,6 +621,7 @@ CW_IOROUTE_ADDR, address 55 (0x37) - GPIO Pin Routing [8 bytes]
+          registers_iorouting <= 64'b00000010_00000001;
+          reg_userio_cwdriven <= 8'b0;
+          userio_fpga_debug <= 1'b0;
++         userio_jtag_clocks <= 2'b0;
+          userio_target_debug <= 1'b0;
+          userio_target_debug_swd <= 1'b0;
+          userio_drive_data <= 8'b0;
+@@ -638,7 +640,7 @@ CW_IOROUTE_ADDR, address 55 (0x37) - GPIO Pin Routing [8 bytes]
+            `CW_IOROUTE_ADDR: registers_iorouting[reg_bytecnt*8 +: 8] <= reg_datai;
+ 
+            `USERIO_CW_DRIVEN: reg_userio_cwdriven[reg_bytecnt*8 +: 8] <= reg_datai;
+-           `USERIO_DEBUG_DRIVEN: {userio_target_debug_swd, userio_target_debug, userio_fpga_debug} <= reg_datai[2:0];
++           `USERIO_DEBUG_DRIVEN: {userio_jtag_clocks, userio_target_debug_swd, userio_target_debug, userio_fpga_debug} <= reg_datai[4:0];
+            `USERIO_DEBUG_SELECT: userio_fpga_debug_select <= reg_datai[3:0];
+            `USERIO_DRIVE_DATA: userio_drive_data[reg_bytecnt*8 +: 8] <= reg_datai;
+ 
+diff --git a/fpga/hdl/reg_la.v b/fpga/hdl/reg_la.v
+index 3790ff0..d124f7e 100644
+--- a/fpga/hdl/reg_la.v
++++ b/fpga/hdl/reg_la.v
+@@ -81,6 +81,7 @@ module reg_la #(
+    input  wire         glitch_trigger_manual_sourceclock,
+    input  wire         glitch_trigger,
+    input  wire         capture_active,
++   input  wire         adc_capture_started,
+    output wire         capture_start,
+    output wire         capture_done,
+ 
+@@ -194,7 +195,7 @@ module reg_la #(
+    end
+ 
+     wire capture_go_async = manual_capture | ( (trigger_source_reg == 6'b000_000)? glitch_go : 
+-                                               (trigger_source_reg == 6'b000_001)? capture_active : 
++                                               (trigger_source_reg == 6'b000_001)? adc_capture_started : //was capture_active
+                                                (trigger_source_reg == 6'b000_010)? glitch_trigger_manual_sourceclock :
+                                                (trigger_source_reg == 6'b000_011)? hs1 :
+                                                (trigger_source_reg == 6'b000_100)? glitch_trigger :
+-- 
+2.39.0.windows.2
+
