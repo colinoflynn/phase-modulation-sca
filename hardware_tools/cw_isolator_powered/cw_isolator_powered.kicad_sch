@@ -1,0 +1,130 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "ae41a205-0763-4fe9-9212-980b8ba02e5b")
+	(paper "USLetter")
+	(title_block
+		(title "Isolator for Jitter Testing")
+	)
+	(lib_symbols)
+	(sheet
+		(at 60.96 49.53)
+		(size 19.05 24.13)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "2f5907b9-c2f6-4a5a-9018-d2e786ae08b8")
+		(property "Sheetname" "Isolators"
+			(at 60.96 48.8184 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "isolators.kicad_sch"
+			(at 60.96 74.2446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "cw_isolator_powered"
+				(path "/ae41a205-0763-4fe9-9212-980b8ba02e5b"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 130.81 49.53)
+		(size 21.59 24.13)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "51056fb9-c5fa-4b48-ac85-843dbec2d897")
+		(property "Sheetname" "measurement"
+			(at 130.81 48.8184 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "measurement.kicad_sch"
+			(at 130.81 74.2446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "cw_isolator_powered"
+				(path "/ae41a205-0763-4fe9-9212-980b8ba02e5b"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 93.98 49.53)
+		(size 20.32 24.13)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "8a669bcf-b50b-448b-883c-359c6b537978")
+		(property "Sheetname" "Power"
+			(at 93.98 48.8184 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "power.kicad_sch"
+			(at 93.98 74.2446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "cw_isolator_powered"
+				(path "/ae41a205-0763-4fe9-9212-980b8ba02e5b"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)

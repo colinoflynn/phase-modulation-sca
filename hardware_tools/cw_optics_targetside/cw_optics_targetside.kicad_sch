@@ -1,0 +1,89 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "5790e14b-deb1-4080-a805-90258753cca1")
+	(paper "A4")
+	(lib_symbols)
+	(sheet
+		(at 93.98 48.26)
+		(size 21.59 24.13)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "0d1ab852-469f-4299-9bbd-7566fb3d3734")
+		(property "Sheetname" "CWPins"
+			(at 93.98 47.5484 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "CWPins.kicad_sch"
+			(at 93.98 72.9746 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "cw_optics_targetside"
+				(path "/5790e14b-deb1-4080-a805-90258753cca1"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 63.5 48.26)
+		(size 20.32 24.13)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "d10b5882-9773-49df-862f-8865efa4d560")
+		(property "Sheetname" "optics1"
+			(at 63.5 47.5484 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "optics1.kicad_sch"
+			(at 63.5 72.9746 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "cw_optics_targetside"
+				(path "/5790e14b-deb1-4080-a805-90258753cca1"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)
