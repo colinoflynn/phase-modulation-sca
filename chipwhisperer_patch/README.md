@@ -1,7 +1,19 @@
-This patch adds the option to route a clock out on TCK/TDO.
+# ChipWhisperer-Husky JTAG Attack Mode
 
-The *ratio* between these clocks can be adjusted by changing the Verilog source & resynthesizing.
+This patch adds the option to route a clock out on TCK/TDO. It is enabled by writing to one of the registers via the USB command, see notebooks for demos.
 
+We will see if ChipWhisperer would be interested in having this patch, but as seen it is a simple Verilog patch you can apply locally.
+
+### Pre-built bitstreams
+
+There is no need to rebuild this if you want to test. We have included bitstreams in the `notebooks_capture\firmwares` folder. They are used by the
+capture notebooks by default.
+
+### Adjusting CLocks
+
+This outputs a clock on TCK and TDO which is based on the `CLKGEN` clock (e.g., you'd set with `clkgen_freq`).
+
+The *ratio* between these different clocks can be adjusted by changing the Verilog source & resynthesizing.
 
 Note the PLL block VCO needs to be in the range 800-1600MHz. When Vivado runs synthesis it will pull the input clock from the constraints, which is set to 200 MHz.
 This means the "multiply" is set to `8`. I found in practice this works even if you are running the CLKGEN much slower (down to ~10MHz or so), which means your VCO
