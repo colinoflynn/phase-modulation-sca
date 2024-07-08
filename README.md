@@ -1,6 +1,6 @@
 # Phase Moducation Side Channel Analysis and JTAG Attacks
 
-This repository is a companion for the T-CHES paper submission "Phase Modulation Side Channels: Jittery JTAG for On-Chip Voltage Measurements". You can see a current draft on the [E-Print Server](https://eprint.iacr.org/2024/1107).
+This repository is a companion for the paper submission "Phase Modulation Side Channels: Jittery JTAG for On-Chip Voltage Measurements". You can see a current draft on the [E-Print Server](https://eprint.iacr.org/2024/1107).
 
 This repository is still being updated & will shortly have more complete information included!
 
@@ -16,7 +16,7 @@ The paper in this repo expands on this to first demonstrate that we could call t
 
 ![](img/opticalisolator.jpeg)
 
-The point of this is that all analog signals (should) be removed, leaving only the timing (phase) information (NB: note similar tests were done in the JitSCA work, there are some extensions but this section is primarily confirming the prior work). Because this is all done using the ChipWhisperer hardware, we can easily compare a classic shunt-based measurement (using a normal analog signal) with our phase-based measurement (after the optical isolators):
+The point of this is that all analog signals (should) be removed, leaving only the timing (phase) information (NB: note similar tests were done in the JitSCA work, there are some extensions but this section is primarily confirming the prior work). Because this is all done using the ChipWhisperer hardware, we can easily compare a classic shunt-based measurement (using a normal analog signal) with our phase-based measurement (after the optical isolators). The top waveforms (in green) are using the optical isolator board, the bottom waveforms (in blue) are with a shunt resistor and ADC.
 
 ![](img/opticalpmwaveform.png)
 
