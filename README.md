@@ -1,8 +1,19 @@
 # Phase Moducation Side Channel Analysis and JTAG Attacks
 
-This repository is a companion for the paper submission "Phase Modulation Side Channels: Jittery JTAG for On-Chip Voltage Measurements". You can see a current draft on the [E-Print Server](https://eprint.iacr.org/2024/1107).
+This repository is a companion for the T-CHES Paper "Phase Modulation Side Channels: Jittery JTAG for On-Chip Voltage Measurements". You can see a current version on the [E-Print Server](https://eprint.iacr.org/2024/1107).
 
-This repository is still being updated & will shortly have more complete information included!
+If referencing the paper, please reference the T-CHES publication. As the Volume 4 is not fully published, the following can be used until the full reference is available:
+
+```
+@article{PhaseModulationCO24,
+    author=  {Colin O'Flynn},
+    title =  {Phase Modulation Side Channels: Jittery JTAG for On-Chip Voltage Measurements},
+    volume=  {2024},
+    number=  {4},
+    journal= {IACR Transactions on Cryptographic Hardware and Embedded Systems},
+    year =   {2024}
+}
+```
 
 ## What's this Paper About?
 
@@ -26,7 +37,9 @@ It is also successful for a CPA attack, being only slightly noisier. You could u
 
 ### JTAG Side Channel Measurements
 
-The second part of the paper includes another idea: if we can use digital paths for side channels, why not use JTAG? JTAG contains a "bypass mode", which if we enable bypass mode lets us route a clock across the target.
+The second part of the paper includes another idea: if we can use digital paths for side channels, why not use JTAG? JTAG contains a "bypass mode", which if we enable bypass mode lets us route a clock across the target. The setup is something like this:
+
+![](img/jtag-setup.png)
 
 Here is an example of a side channel trace measured with a JTAG port, again compared to the same target using a shunt resistor:
 
