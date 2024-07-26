@@ -1,5 +1,9 @@
 # T-CHES Artifact
 
+The T-CHES Artifact is part of the main [GITHub repository](https://github.com/colinoflynn/phase-modulation-sca). It is specifically seen in the `tches_artifact` folder.
+
+The uploaded file for the artifact contains the root directory, which contains many *additional* results beyond the core artifact which recreates the most important parts of the results.
+
 This folder contains a "artifact" for the paper, that more directly recreates the results. This artifact has the same information as the Jupyter Notebooks, but is designed for a "single run" that can be used to more quickly verify the results.
 
 ## Reproducable Results
