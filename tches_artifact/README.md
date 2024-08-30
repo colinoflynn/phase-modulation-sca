@@ -29,6 +29,8 @@ To run them on Google Colab, simply upload & run each notebook. Each notebook de
 
 These notebooks use recorded power traces. See below for capturing new power traces.
 
+Artifact has been run on Python 3.10 (tested on 3.10.8 and 3.10.12), with the `requirements.txt` from the 3.10.12 install.
+
 ## Recreating Hardware Captures
 
 The repository also contains the hardware and scripts for recreating the captures. As this requires special hardware has been left out of the artifact folder, but is part of the main repository.
