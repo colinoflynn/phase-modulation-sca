@@ -1,19 +1,23 @@
 # Phase Moducation Side Channel Analysis and JTAG Attacks
 
-This repository is a companion for the T-CHES Paper "Phase Modulation Side Channels: Jittery JTAG for On-Chip Voltage Measurements". You can see a current version on the [E-Print Server](https://eprint.iacr.org/2024/1107).
+This repository is a companion for the T-CHES Paper "Phase Modulation Side Channels: Jittery JTAG for On-Chip Voltage Measurements". You can see a current version on the [T-CHES Server](https://tches.iacr.org/index.php/TCHES/article/view/11797/11302).
 
 If referencing the paper, please reference the T-CHES publication. As the Volume 4 is not fully published, the following can be used until the full reference is available:
 
 ```
 @article{PhaseModulationCO24,
-    author=  {Colin O'Flynn},
-    title =  {Phase Modulation Side Channels: Jittery JTAG for On-Chip Voltage Measurements},
-    volume=  {2024},
-    number=  {4},
-    journal= {IACR Transactions on Cryptographic Hardware and Embedded Systems},
-    year =   {2024}
-}
+     author=  {Colin O'Flynn},
+     title =  {Phase Modulation Side Channels: Jittery JTAG for On-Chip Voltage Measurements},
+     volume=  {2024},
+     url   =  {https://tches.iacr.org/index.php/TCHES/article/view/11797},
+     DOI   =  {10.46586/tches.v2024.i4.382-424},
+     number=  {4},
+     journal= {IACR Transactions on Cryptographic Hardware and Embedded Systems},
+     year  =  {2024},
+     month =  {Sep.},
+     pages =  {382–424} }
 ```
+
 
 ## What's this Paper About?
 
